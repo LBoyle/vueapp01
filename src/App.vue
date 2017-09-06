@@ -1,32 +1,11 @@
 <template>
   <div id="app">
 
-    <ul class="myNav">
-      <li><router-link :to="{name: 'Home'}">Home</router-link></li>
-      <li><router-link :to="{name: 'Images'}">Images</router-link></li>
-      <li class="hideLogged show" v-if="!isAuthenticated"><router-link :to="{name: 'Login'}">Login</router-link></li>
-      <li class="hideLogged show" v-if="!isAuthenticated"><router-link :to="{name: 'Register'}">Register</router-link></li>
-      <li class="showLogged hide" v-if="isAuthenticated"><a href="javascript:void(0)" v-on:click="logout()">Logout</a></li>
-    </ul>
-
-
     <nav class="navbar">
       <div class="navbar-brand">
-        <a class="navbar-item" href="http://bulma.io">
-          <img src="http://bulma.io/images/bulma-logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28">
-        </a>
-
-        <a class="navbar-item is-hidden-desktop" href="https://github.com/jgthms/bulma" target="_blank">
-          <span class="icon" style="color: #333;">
-            <i class="fa fa-github"></i>
-          </span>
-        </a>
-
-        <a class="navbar-item is-hidden-desktop" href="https://twitter.com/jgthms" target="_blank">
-          <span class="icon" style="color: #55acee;">
-            <i class="fa fa-twitter"></i>
-          </span>
-        </a>
+        <div class="navbar-item">
+          <h1><router-link :to="{name: 'Home'}">Hundred River Farm</router-link></h1>
+        </div>
 
         <div class="navbar-burger burger" data-target="navMenu">
           <span></span>
@@ -37,7 +16,19 @@
 
       <div class="navbar-menu" id="navMenu">
         <div class="navbar-start">
-          <div class="navbar-item has-dropdown is-hoverable">
+          <div class="navbar-item">
+            <router-link :to="{name: 'Home'}">Home</router-link>
+          </div>
+          <div class="navbar-item " v-show="!isAuthenticated">
+            <router-link :to="{name: 'Login'}">Login</router-link>
+          </div>
+          <div class="navbar-item " v-show="!isAuthenticated">
+            <router-link :to="{name: 'Register'}">Register</router-link>
+          </div>
+          <div class="navbar-item " v-show="isAuthenticated">
+            <a href="javascript:void(0)" v-on:click="logout()">Logout</a>
+          </div>
+          <!-- <div class="navbar-item has-dropdown is-hoverable">
             <a class="navbar-link  is-active" href="/documentation/overview/start/">
               Docs
             </a>
@@ -79,8 +70,8 @@
                 </div>
               </div>
             </div>
-          </div>
-          <div class="navbar-item has-dropdown is-hoverable">
+          </div> -->
+          <!-- <div class="navbar-item has-dropdown is-hoverable">
             <a class="navbar-link " href="http://bulma.io/blog/">
               Blog
             </a>
@@ -139,8 +130,8 @@
                 </div>
               </div>
             </div>
-          </div>
-          <div class="navbar-item has-dropdown is-hoverable">
+          </div> -->
+          <!-- <div class="navbar-item has-dropdown is-hoverable">
             <div class="navbar-link">
               More
             </div>
@@ -166,19 +157,19 @@
                 </div>
               </a>
             </div>
-          </div>
-          <a class="navbar-item " href="http://bulma.io/expo/">
+          </div> -->
+          <!-- <a class="navbar-item " href="http://bulma.io/expo/">
             <span class="bd-emoji">🎨</span>
             Expo
           </a>
           <a class="navbar-item " href="http://bulma.io/love/">
             <span class="bd-emoji">❤️</span>
             Love
-          </a>
+          </a> -->
         </div>
 
         <div class="navbar-end">
-          <a class="navbar-item is-hidden-desktop-only" href="https://github.com/jgthms/bulma" target="_blank">
+          <!-- <a class="navbar-item is-hidden-desktop-only" href="https://github.com/jgthms/bulma" target="_blank">
             <span class="icon" style="color: #333;">
               <i class="fa fa-github"></i>
             </span>
@@ -187,9 +178,9 @@
             <span class="icon" style="color: #55acee;">
               <i class="fa fa-twitter"></i>
             </span>
-          </a>
+          </a> -->
           <div class="navbar-item">
-            <div class="field is-grouped">
+            <!-- <div class="field is-grouped">
               <p class="control">
                 <a class="bd-tw-button button"
                   data-social-network="Twitter"
@@ -214,7 +205,7 @@
                   <span>Download</span>
                 </a>
               </p>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -236,14 +227,15 @@ export default {
   data() {
     return {
       users: [],
-      isAuthenticated: false
+      isAuthenticated: (window.localStorage.getItem('token')) ? true : false
     }
   },
   methods: {
     logout: function() {
       window.localStorage.removeItem('token');
-      window.isAuthenticated = false;
+      // window.isAuthenticated = false;
       router.push({name: 'Home'});
+      location.reload();
       return;
     }
   },
@@ -281,10 +273,6 @@ export default {
 #app {
   text-align: center;
   color: #2c3e50;
-}
-.myNav li {
-  display: inline;
-  padding: 0 10px;
 }
 /*.hide {
   display: none !important;

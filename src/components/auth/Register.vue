@@ -73,13 +73,14 @@ export default {
         console.log(res);
         if(res.status === 200) {
           window.localStorage.setItem('token', res.body.token);
-          window.isAuthenticated = true;
+          // window.isAuthenticated = true;
           router.push({name: 'Home'});
+          location.reload();
           return;
         }
       })
       .catch(err => {
-        window.isAuthenticated = false;
+        // window.isAuthenticated = false;
         console.log(err);
       });
     }
