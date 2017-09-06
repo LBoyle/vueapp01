@@ -16,14 +16,14 @@
 
       <div class="navbar-menu" id="navMenu">
         <div class="navbar-start">
-          <div class="navbar-item">
-            <router-link :to="{name: 'Home'}">Home</router-link>
-          </div>
           <div class="navbar-item " v-show="!isAuthenticated">
             <router-link :to="{name: 'Login'}">Login</router-link>
           </div>
           <div class="navbar-item " v-show="!isAuthenticated">
             <router-link :to="{name: 'Register'}">Register</router-link>
+          </div>
+          <div class="navbar-item" v-show="isAuthenticated">
+            <router-link :to="{name: 'Images'}">Images</router-link>
           </div>
           <div class="navbar-item " v-show="isAuthenticated">
             <a href="javascript:void(0)" v-on:click="logout()">Logout</a>
